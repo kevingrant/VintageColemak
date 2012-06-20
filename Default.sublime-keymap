@@ -1,35 +1,25 @@
 [
-	// inSert
-	{ "keys": ["s"], "command": "enter_insert_mode",
-	  "context":
-	  [
-			{"key": "setting.command_mode"},
-			{"key": "selection_empty"}
-	  ]
-	},
-	{ "keys": ["S"], "command": "enter_insert_mode", "args":
-		{"insert_command": "vi_move_to_first_non_white_space_character"},
+	// Movement hjkl becomes neui
+	{ "keys": ["i"], "command": "set_motion", "args": {
+		"motion": "vi_move_by_characters_in_line",
+		"motion_args": {"forward": true, "extend": true, "visual": false }},
 		"context": [{"key": "setting.command_mode"}]
 	},
-	{ "keys": ["S"], "command": "enter_insert_mode",
-		"args": {"insert_command": "shrink_selections_to_beginning"},
-		"context": [
-			{"key": "setting.command_mode"},
-			{"key": "selection_empty", "operator": "equal", "operand": false}
-		]
-	},
-
-
-	// Next/Prev Find
-	{
-		"keys": ["k"], "command": "find_next",
-		"args": {"select_text": false},
+	{ "keys": ["n"], "command": "set_motion", "args": {
+		"motion": "vi_move_by_characters_in_line",
+		"motion_args": {"forward": false, "extend": true }},
 		"context": [{"key": "setting.command_mode"}]
 	},
-	{
-		"keys": ["K"],
-		"command": "find_prev",
-		"args": {"select_text": false},
+	{ "keys": ["e"], "command": "set_motion", "args": {
+		"motion": "move",
+		"motion_args": {"by": "lines", "forward": true, "extend": true },
+		"linewise": true },
+		"context": [{"key": "setting.command_mode"}]
+	},
+	{ "keys": ["u"], "command": "set_motion", "args": {
+		"motion": "move",
+		"motion_args": {"by": "lines", "forward": false, "extend": true },
+		"linewise": true },
 		"context": [{"key": "setting.command_mode"}]
 	},
 
@@ -43,55 +33,17 @@
 	},
 
 
-	// Transform (Change)
-	{ "keys": ["t"], "command": "set_action", "args": {
-		"action": "enter_insert_mode",
-		"description": "Transform (Change)",
-		"action_args": {"insert_command": "vi_delete"}},
+	// Page Up/Down
+	{ "keys": ["j"], "command": "set_motion", "args": {
+		"motion": "move",
+		"motion_args": {"by": "pages", "forward": false, "extend": true },
+		"linewise": true },
 		"context": [{"key": "setting.command_mode"}]
 	},
-
-	//  Copy (Yank)
-	{ "keys": ["c"], "command": "set_action", "args": {
-		"action": "vi_copy",
-		"description": "Copy (Yank)"},
-		"context": [{"key": "setting.command_mode"}]
-	},
-
-	// Motions to allow double press to mean entire line
-	{ "keys": ["t"], "command": "set_motion", "args": {
-		"motion": "vi_dont_move",
-		"linewise": true},
-		"context":
-		[
-			{"key": "setting.command_mode"},
-			{"key": "vi_action", "operand": "enter_insert_mode"}
-		]
-	},
-	{ "keys": ["c"], "command": "set_motion", "args": {
-		"motion": "expand_selection",
-		"motion_args": {"to": "line" },
-		"mode": "normal"},
-		"context":
-		[
-			{"key": "setting.command_mode"},
-			{"key": "vi_action", "operand": "vi_copy"}
-		]
-	},
-
-	// Single key, combined action-motions
-	{ "keys": ["T"], "command": "set_action_motion", "args": {
-		"action": "enter_insert_mode",
-		"action_args": {"insert_command": "vi_delete"},
-		"motion": "vi_move_to_hard_eol",
-		"motion_args": {"repeat": 1, "extend": true},
-		"motion_inclusive": true },
-		"context": [{"key": "setting.command_mode"}]
-	},
-	{ "keys": ["C"], "command": "set_action_motion", "args": {
-		"action": "vi_copy",
-		"motion": "expand_selection",
-		"motion_args": {"to": "line" }},
+	{ "keys": ["h"], "command": "set_motion", "args": {
+		"motion": "move",
+		"motion_args": {"by": "pages", "forward": true, "extend": true },
+		"linewise": true },
 		"context": [{"key": "setting.command_mode"}]
 	},
 
@@ -138,7 +90,7 @@
 		"context": [{"key": "setting.command_mode"}]
 	},
 
-	// Bonus: alt+y and alt+l move by sub-words
+	// camelCase and underscore word forwards and backwards
 	{ "keys": ["alt+y"], "command": "set_motion", "args": {
 		"motion": "move",
 		"motion_args": {"by": "stops", "word_begin": true, "sub_word_begin": true, "punct_begin": true, "empty_line": true, "forward": true, "extend": true },
@@ -164,46 +116,6 @@
 	},
 
 
-	// Movement hjkl becomes neui
-	{ "keys": ["i"], "command": "set_motion", "args": {
-		"motion": "vi_move_by_characters_in_line",
-		"motion_args": {"forward": true, "extend": true, "visual": false }},
-		"context": [{"key": "setting.command_mode"}]
-	},
-	{ "keys": ["n"], "command": "set_motion", "args": {
-		"motion": "vi_move_by_characters_in_line",
-		"motion_args": {"forward": false, "extend": true }},
-		"context": [{"key": "setting.command_mode"}]
-	},
-	{ "keys": ["e"], "command": "set_motion", "args": {
-		"motion": "move",
-		"motion_args": {"by": "lines", "forward": true, "extend": true },
-		"linewise": true },
-		"context": [{"key": "setting.command_mode"}]
-	},
-	{ "keys": ["u"], "command": "set_motion", "args": {
-		"motion": "move",
-		"motion_args": {"by": "lines", "forward": false, "extend": true },
-		"linewise": true },
-		"context": [{"key": "setting.command_mode"}]
-	},
-
-
-	// Page Up/Down
-	{ "keys": ["j"], "command": "set_motion", "args": {
-		"motion": "move",
-		"motion_args": {"by": "pages", "forward": false, "extend": true },
-		"linewise": true },
-		"context": [{"key": "setting.command_mode"}]
-	},
-	{ "keys": ["h"], "command": "set_motion", "args": {
-		"motion": "move",
-		"motion_args": {"by": "pages", "forward": true, "extend": true },
-		"linewise": true },
-		"context": [{"key": "setting.command_mode"}]
-	},
-
-
 	// Soft BOL/EOL
 	{ "keys": ["I"], "command": "set_motion", "args": {
 		"motion": "vi_move_to_hard_eol",
@@ -216,6 +128,94 @@
 		"motion": "vi_move_to_first_non_white_space_character",
 		"motion_args": {"extend": true },
 		"clip_to_line": true },
+		"context": [{"key": "setting.command_mode"}]
+	},
+
+
+	// inSert
+	{ "keys": ["s"], "command": "enter_insert_mode",
+	  "context":
+	  [
+			{"key": "setting.command_mode"},
+			{"key": "selection_empty"}
+	  ]
+	},
+	{ "keys": ["S"], "command": "enter_insert_mode", "args":
+		{"insert_command": "vi_move_to_first_non_white_space_character"},
+		"context": [{"key": "setting.command_mode"}]
+	},
+	{ "keys": ["S"], "command": "enter_insert_mode",
+		"args": {"insert_command": "shrink_selections_to_beginning"},
+		"context": [
+			{"key": "setting.command_mode"},
+			{"key": "selection_empty", "operator": "equal", "operand": false}
+		]
+	},
+
+
+	// Transform (Change)
+	{ "keys": ["t"], "command": "set_action", "args": {
+		"action": "enter_insert_mode",
+		"description": "Transform (Change)",
+		"action_args": {"insert_command": "vi_delete"}},
+		"context": [{"key": "setting.command_mode"}]
+	},
+	// Transform (Change) to EOL
+	{ "keys": ["T"], "command": "set_action_motion", "args": {
+		"action": "enter_insert_mode",
+		"action_args": {"insert_command": "vi_delete"},
+		"motion": "vi_move_to_hard_eol",
+		"motion_args": {"repeat": 1, "extend": true},
+		"motion_inclusive": true },
+		"context": [{"key": "setting.command_mode"}]
+	}
+
+	//  Copy (Yank)
+	{ "keys": ["c"], "command": "set_action", "args": {
+		"action": "vi_copy",
+		"description": "Copy (Yank)"},
+		"context": [{"key": "setting.command_mode"}]
+	},
+	// Copy (Yank) entire line
+	{ "keys": ["C"], "command": "set_action_motion", "args": {
+		"action": "vi_copy",
+		"motion": "expand_selection",
+		"motion_args": {"to": "line" }},
+		"context": [{"key": "setting.command_mode"}]
+	},
+
+	// Double press entire line
+	{ "keys": ["t"], "command": "set_motion", "args": {
+		"motion": "vi_dont_move",
+		"linewise": true},
+		"context":
+		[
+			{"key": "setting.command_mode"},
+			{"key": "vi_action", "operand": "enter_insert_mode"}
+		]
+	},
+	{ "keys": ["c"], "command": "set_motion", "args": {
+		"motion": "expand_selection",
+		"motion_args": {"to": "line" },
+		"mode": "normal"},
+		"context":
+		[
+			{"key": "setting.command_mode"},
+			{"key": "vi_action", "operand": "vi_copy"}
+		]
+	},
+
+
+	// Next/Prev Find
+	{
+		"keys": ["k"], "command": "find_next",
+		"args": {"select_text": false},
+		"context": [{"key": "setting.command_mode"}]
+	},
+	{
+		"keys": ["K"],
+		"command": "find_prev",
+		"args": {"select_text": false},
 		"context": [{"key": "setting.command_mode"}]
 	},
 
