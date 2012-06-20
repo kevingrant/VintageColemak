@@ -168,7 +168,7 @@
 		"motion_args": {"repeat": 1, "extend": true},
 		"motion_inclusive": true },
 		"context": [{"key": "setting.command_mode"}]
-	}
+	},
 
 	//  Copy (Yank)
 	{ "keys": ["c"], "command": "set_action", "args": {
