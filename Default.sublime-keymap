@@ -254,5 +254,80 @@
 		"motion_args": {"repeat": 1},
 		"linewise": true },
 		"context": [{"key": "setting.command_mode"}]
+	},
+
+
+	// Inner Text Object motions
+	// Necessary to list these after remapping "i".
+
+	{ "keys": ["i", "w"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_words",
+		"motion_args": {"repeat": 1}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+
+	{ "keys": ["i", "W"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_big_words",
+		"motion_args": {"repeat": 1}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+
+	{ "keys": ["i", "\""], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_quotes",
+		"motion_args": {"character": "\""}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+	{ "keys": ["i", "'"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_quotes",
+		"motion_args": {"character": "'"}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+
+	{ "keys": ["i", "t"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_tag"},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+
+	{ "keys": ["i", "("], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_brackets",
+		"motion_args": {"character": "("}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+	{ "keys": ["i", ")"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_brackets",
+		"motion_args": {"character": "("}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+	{ "keys": ["i", "b"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_brackets",
+		"motion_args": {"character": "("}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+
+	{ "keys": ["i", "["], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_brackets",
+		"motion_args": {"character": "["}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+	{ "keys": ["i", "]"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_brackets",
+		"motion_args": {"character": "["}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+
+	{ "keys": ["i", "{"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_brackets",
+		"motion_args": {"character": "{"}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+	{ "keys": ["i", "}"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_brackets",
+		"motion_args": {"character": "{"}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
+	},
+	{ "keys": ["i", "B"], "command": "set_motion", "args": {
+		"motion": "vi_expand_to_brackets",
+		"motion_args": {"character": "{"}},
+		"context": [{"key": "setting.command_mode"}, {"key": "vi_can_enter_text_object"}]
 	}
 ]
